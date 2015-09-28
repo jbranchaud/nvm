@@ -20,6 +20,7 @@ GRAPH
   minitest-handler (0.2.1)
     chef_handler (>= 0.0.0)
   nvm (0.1.6)
+    build-essential (>= 0.0.0)
     git (>= 2.1.0)
   nvm_test (0.1.0)
     nvm (>= 0.0.0)

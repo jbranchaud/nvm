@@ -20,21 +20,33 @@
 include_recipe 'git'
 
 ############################################################################
+
 # Install dependencies
-
-package 'libcurl3' do
-  action :install
-end
-
-package 'curl' do
-  action :install
-end
-
-if node['nvm']['install_deps_to_build_from_source']
-  package 'build-essential' do
+case node[:platform]
+when "debian"
+  package 'libcurl3' do
     action :install
   end
-  package 'libssl-dev' do
+
+  package 'curl' do
     action :install
   end
+
+  if node['nvm']['install_deps_to_build_from_source']
+    package 'build-essential' do
+      action :install
+    end
+
+    package 'libssl-dev' do
+      action :install
+    end
+  end
+
+when "centos"
+  if node['nvm']['install_deps_to_build_from_source']
+    include_recipe 'build-essential'
+  end
+
+else
+  Chef::Log.warn "Platform not supported."
 end
