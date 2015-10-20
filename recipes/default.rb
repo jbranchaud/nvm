@@ -22,8 +22,8 @@ include_recipe 'git'
 ############################################################################
 
 # Install dependencies
-case node[:platform]
-when "debian"
+case node['platform_family']
+when 'debian'
   package 'libcurl3' do
     action :install
   end
@@ -42,7 +42,7 @@ when "debian"
     end
   end
 
-when "centos"
+when 'rhel'
   if node['nvm']['install_deps_to_build_from_source']
     include_recipe 'build-essential'
   end
