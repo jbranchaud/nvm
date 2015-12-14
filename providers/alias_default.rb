@@ -35,17 +35,16 @@ action :create do
     user_home = '/root'
   end
 
-	script "Alias default node.js version to #{new_resource.version}..." do
+  script "Alias default node.js version to #{new_resource.version}..." do
     interpreter 'bash'
-    flags '-l'
     user user
     group group
     environment Hash[ 'HOME' => user_home ]
-		code <<-EOH
+    code <<-EOH
       export NVM_DIR=#{new_resource.nvm_directory}
-			#{node['nvm']['source']}
-			nvm alias default #{new_resource.version}
-		EOH
-	end
-	new_resource.updated_by_last_action(true)
+      #{node['nvm']['source']}
+      nvm alias default #{new_resource.version}
+    EOH
+  end
+  new_resource.updated_by_last_action(true)
 end

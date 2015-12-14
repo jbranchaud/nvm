@@ -7,3 +7,5 @@ metadata.json
 vendor.kitchen/
 .kitchen
 *.tar.gz
+Gemfile.lock
+npm-debug.lock

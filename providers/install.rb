@@ -18,8 +18,8 @@
 #
 
 action :create do
-	from_source_message = new_resource.from_source ? ' from source' : ''
-	from_source_arg = new_resource.from_source ? '-s' : ''
+  from_source_message = new_resource.from_source ? ' from source' : ''
+  from_source_arg = new_resource.from_source ? '-s' : ''
   user_home = new_resource.user_home
   user_install = new_resource.user_install
   chef_nvm_user = 'root'
@@ -75,27 +75,27 @@ action :create do
     })
   end
 
-	script "Installing node.js #{new_resource.version}#{from_source_message}, as #{chef_nvm_user}:#{chef_nvm_group} from #{nvm_dir}" do
+  script "Installing node.js #{new_resource.version}#{from_source_message}, as #{chef_nvm_user}:#{chef_nvm_group} from #{nvm_dir}" do
     interpreter 'bash'
-    flags '-l'
     user chef_nvm_user
     group chef_nvm_group
-    environment Hash[ 'HOME' => user_home ]
-		code <<-EOH
+    environment Hash['HOME' => user_home]
+    code <<-EOH
       export NVM_DIR=#{nvm_dir}
       source /etc/profile.d/nvm.sh
-			nvm install #{from_source_arg} #{new_resource.version}
-		EOH
-	end
-	# break FC021: Resource condition in provider may not behave as expected
-	# silly thing because new_resource.version is dynamic not fixed
-	nvm_alias_default new_resource.version do
+      nvm install #{from_source_arg} #{new_resource.version}
+    EOH
+  end
+
+  # break FC021: Resource condition in provider may not behave as expected
+  # silly thing because new_resource.version is dynamic not fixed
+  nvm_alias_default new_resource.version do
     user chef_nvm_user
     group chef_nvm_group
     user_home user_home
     nvm_directory nvm_dir
-		action :create
-		only_if { new_resource.alias_as_default }
-	end
-	new_resource.updated_by_last_action(true)
+    action :create
+    only_if { new_resource.alias_as_default }
+  end
+  new_resource.updated_by_last_action(true)
 end
