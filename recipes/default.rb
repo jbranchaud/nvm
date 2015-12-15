@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+include_recipe 'git'
+
 ############################################################################
 
 # Install dependencies
