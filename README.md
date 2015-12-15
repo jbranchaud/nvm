@@ -17,9 +17,9 @@ include_recipe 'nvm'
 
 # install node.js v0.10.5
 nvm_install 'v0.10.5'  do
-	from_source false
-	alias_as_default true
-	action :create
+  from_source false
+  alias_as_default true
+  action :create
 end
 ```
 
@@ -62,9 +62,9 @@ Install from binary
 
 ```ruby
 nvm_install '0.10.5'  do
-	from_source false
-	alias_as_default true
-	action :create
+  from_source false
+  alias_as_default true
+  action :create
 end
 ```
 
@@ -72,9 +72,9 @@ Install from source
 
 ```ruby
 nvm_install '0.10.5'  do
-	from_source true
-	alias_as_default true
-	action :create
+  from_source true
+  alias_as_default true
+  action :create
 end
 ```
 
@@ -146,7 +146,7 @@ Use by default node.js version 0.10.0
 
 ```ruby
 nvm_alias_default '0.10.0'  do
-	action :create
+  action :create
 end
 ```
 
