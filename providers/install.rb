@@ -62,6 +62,8 @@ action :create do
     group chef_nvm_group
     repository node['nvm']['repository']
     reference node['nvm']['reference']
+    retries 5
+    retry_delay 5
     action :sync
   end
 
