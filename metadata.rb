@@ -9,3 +9,4 @@ supports 		 'ubuntu', ">= 12.04"
 supports     'centos', ">= 6.5"
 
 depends "build-essential"
+depends "git"
