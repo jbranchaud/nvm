@@ -65,6 +65,7 @@ action :create do
     retries 5
     retry_delay 5
     action :sync
+    not_if { ::File.exists?(nvm_dir + "/.git") }
   end
 
   template '/etc/profile.d/nvm.sh' do
